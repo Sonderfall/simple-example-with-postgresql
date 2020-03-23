@@ -19,6 +19,17 @@ class UsersController {
     @GetMapping
     fun list(): Iterable<User> = userRepository.findAll()
 
+    @GetMapping
+    fun cities(): Iterable<String> {
+        val users = userRepository.findAll();
+        val cities = arrayListOf<String>();
+
+        for (user in users)
+            user?.city?.let { cities.add(it); }
+
+        return cities;
+    }
+
     @PostMapping
     fun create(@RequestBody user: User): User = userRepository.save(user)
 
@@ -34,4 +45,8 @@ class UsersController {
         )
     }.map { userRepository.save(it) }
 
+    fun <T : Any> T?.notNull(f: (it: T) -> Unit) {
+        if (this != null)
+            f(this)
+    }
 }
