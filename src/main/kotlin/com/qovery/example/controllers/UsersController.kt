@@ -19,7 +19,7 @@ class UsersController {
     @GetMapping
     fun list(): Iterable<User> = userRepository.findAll()
 
-    @GetMapping
+    @GetMapping("/cities")
     fun cities(): Iterable<String> {
         val users = userRepository.findAll();
         val cities = arrayListOf<String>();
@@ -44,9 +44,4 @@ class UsersController {
                 city = user.city
         )
     }.map { userRepository.save(it) }
-
-    fun <T : Any> T?.notNull(f: (it: T) -> Unit) {
-        if (this != null)
-            f(this)
-    }
 }
