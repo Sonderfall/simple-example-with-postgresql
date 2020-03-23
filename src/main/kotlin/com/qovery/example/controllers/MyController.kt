@@ -10,9 +10,14 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/my")
 class MyController {
 
-    @GetMapping
-    fun poney() : Int {
+    @GetMapping("/poney")
+    fun getPoney() : Int {
         return 42;
+    }
+
+    @GetMapping("/poney2")
+    fun getPoney2() : Int {
+        return 46;
     }
 
 }
